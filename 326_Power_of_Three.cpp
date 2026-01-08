@@ -29,8 +29,7 @@ class Solution {
 public:
     bool isPowerOfThree(int n) {
        
-       class Solution {
-public:
+
 
         // if (n <= 0) return false;
 
