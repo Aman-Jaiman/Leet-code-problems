@@ -1,3 +1,20 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+/**
+ * Definition for a binary tree node.
+ */
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+
+    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    TreeNode(int x, TreeNode *left, TreeNode *right)
+        : val(x), left(left), right(right) {}
+};
+
 class Solution {
 public:
     vector<int> rightSideView(TreeNode* root) {
@@ -14,10 +31,11 @@ public:
                 TreeNode* node = q.front();
                 q.pop();
 
+                // Push children for next level
                 if (node->left) q.push(node->left);
                 if (node->right) q.push(node->right);
 
-                // last node of the level
+                // Last node of this level is visible from the right
                 if (i == size - 1) {
                     ans.push_back(node->val);
                 }
