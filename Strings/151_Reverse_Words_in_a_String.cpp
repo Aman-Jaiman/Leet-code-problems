@@ -37,29 +37,30 @@ Constraints:
 #include <bits/stdc++.h>
 using namespace std;
 
-class Solution
-{
+class Solution {
 public:
-    string reverseWords(string s)
-    {
-        int n = s.length();
-        string ans = "";
-        reverse(s.begin(), s.end());
-        for (int i = 0; i < n; i++)
-        {
-            string word = "";
-            while (i < n && s[i] != ' ')
-            {
-                word += s[i];
-                i++;
-            }
-            reverse(word.begin(), word.end());
-            if (word.length() > 0)
-            {
-                ans += " " + word;
+    string reverseWords(string s) {
+        int i=0,n=s.size();
+        for(int j=0;j<n;j++){
+            if(s[j]!=' '){
+                if(i!=0) s[i++]=' ';
+                while (j < n && s[j] != ' ') {
+                    s[i++] = s[j++];
+                }
             }
         }
-        return ans.substr(1);
+
+        s.resize(i);
+        reverse(s.begin(),s.end());
+
+        int start=0;
+        for(int end=0;end<=s.size();end++){
+            if(end==s.size() || s[end]==' '){
+                reverse(s.begin()+start,s.begin()+end);
+                start=end+1;
+            }
+        }
+        return s;
     }
 };
 
