@@ -1,6 +1,41 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+//Queue implement suing stack
+class MyQueue {
+public:
+    stack<int>s1;
+    MyQueue() {}
+    
+    void push(int x) {
+        if(s1.empty()){
+            s1.push(x);
+            return ;
+        }
+        int item=s1.top();
+        s1.pop();
+        push(x);
+        s1.push(item);
+    }
+    
+    int pop() {
+        if(s1.empty()) return -1;
+        int c=s1.top();
+        s1.pop();
+        return c;
+    }
+    
+    int peek() {
+        return s1.top();
+    }
+    
+    bool empty() {
+        return s1.empty();
+    }
+};
+
+
+/*
 class MyQueue {
 public:
     stack<int> s1;
@@ -45,6 +80,8 @@ public:
         return s1.empty();
     }
 };
+
+*/
 
 // Driver code (for testing)
 int main() {
