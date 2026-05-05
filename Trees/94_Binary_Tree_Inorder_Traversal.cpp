@@ -20,17 +20,46 @@ Constraints:
  * Definition for a binary tree node.
  */
 #include <vector>
+#include<bits/stdc++.h>
 using namespace std;
 
+//using recursive
 struct TreeNode {
     int val;
     TreeNode *left;
     TreeNode *right;
-
+    
     TreeNode() : val(0), left(NULL), right(NULL) {}
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
     TreeNode(int x, TreeNode *left, TreeNode *right)
-        : val(x), left(left), right(right) {}
+    : val(x), left(left), right(right) {}
+};
+
+//using itrative approch
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+        stack<TreeNode*> st;
+        vector<int> ans;
+        TreeNode* curr = root;
+
+        while (curr != NULL || !st.empty()) {
+            // go to leftmost node
+            while (curr != NULL) {
+                st.push(curr);
+                curr = curr->left;
+            }
+
+            curr = st.top();
+            st.pop();
+
+            ans.push_back(curr->val); // visit node
+
+            curr = curr->right; // move to right subtree
+        }
+
+        return ans;
+    }
 };
 
 class Solution {
