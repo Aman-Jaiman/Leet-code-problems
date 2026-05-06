@@ -15,6 +15,7 @@ struct TreeNode {
         : val(x), left(left), right(right) {}
 };
 
+//recursive approch
 class Solution {
 public:
     vector<int> ans;
@@ -30,6 +31,25 @@ public:
 
     vector<int> preorderTraversal(TreeNode* root) {
         preorder(root);
+        return ans;
+    }
+};
+
+//itrative approch
+class Solution {
+public:
+    vector<int> preorderTraversal(TreeNode* root) {
+        vector<int> ans;
+        if (!root) return ans;
+        stack<TreeNode*> st;
+        st.push(root);
+        while (!st.empty()) {
+            TreeNode* curr = st.top();
+            st.pop();
+            ans.push_back(curr->val);
+            if (curr->right) st.push(curr->right);
+            if (curr->left) st.push(curr->left);
+        }
         return ans;
     }
 };
