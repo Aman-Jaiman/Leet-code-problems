@@ -1,6 +1,77 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+//DFS approch using Topological Sort
+class Solution {
+public:
+
+    vector<int> ans;
+
+    bool dfs(vector<vector<int>>& adj,
+             vector<int>& vis,
+             vector<int>& pathVis,
+             int i) {
+
+        vis[i] = 1;
+        pathVis[i] = 1;
+
+        for (auto it : adj[i]) {
+
+            // cycle detected
+            if (pathVis[it]) {
+                return true;
+            }
+
+            if (!vis[it]) {
+
+                if (dfs(adj, vis, pathVis, it)) {
+                    return true;
+                }
+            }
+        }
+
+        pathVis[i] = 0;
+
+        ans.push_back(i);
+
+        return false;
+    }
+
+    vector<int> findOrder(int numCourses,
+                          vector<vector<int>>& prerequisites) {
+
+        int n = numCourses;
+
+        vector<vector<int>> adj(n);
+
+        for (auto p : prerequisites) {
+
+            int a = p[0];
+            int b = p[1];
+
+            adj[b].push_back(a);
+        }
+
+        vector<int> vis(n, 0);
+        vector<int> pathVis(n, 0);
+
+        for (int i = 0; i < n; i++) {
+
+            if (!vis[i]) {
+
+                if (dfs(adj, vis, pathVis, i)) {
+                    return {};
+                }
+            }
+        }
+
+        reverse(ans.begin(), ans.end());
+
+        return ans;
+    }
+};
+
+// BFS using Topological Sort/ Kahn's Algo
 class Solution {
 public:
     vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
