@@ -65,7 +65,7 @@ public:
 
 
 // optimal soution
-// O(n) time
+// O(n.log(n)) time
 class Solution {
 public:
     int lengthOfLIS(vector<int>& nums) {
